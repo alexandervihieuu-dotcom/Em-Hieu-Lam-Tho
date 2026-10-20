@@ -308,28 +308,27 @@ function layout(wish){
   });
   return lines;
  };
- let chosen=42, bodyLines=[];
- // Giữ đủ chỗ cho lời chào và chữ ký; giảm cỡ chữ nếu lời chúc dài.
- for(let size=44;size>=27;size--){
+ let chosen=40, bodyLines=[];
+ // Chữ lớn hơn, ưu tiên dễ đọc trên điện thoại; chỉ thu nhỏ vừa đủ với lời chúc dài.
+ for(let size=54;size>=36;size--){
   const lines=wrap(wish,size);
-  const lineH=Math.round(size*1.28);
-  const greetingH=66;
-  const available=bottom-top-greetingH-90;
+  const lineH=Math.round(size*1.12);
+  const available=bottom-top-70-78;
   if(lines.length*lineH<=available){chosen=size;bodyLines=lines;break;}
   chosen=size;bodyLines=lines;
  }
- const lineH=Math.round(chosen*1.28);
+ const lineH=Math.round(chosen*1.12);
  const totalH=bodyLines.length*lineH;
- const bodyStart=Math.max(top+70, Math.min(top+92, bottom-105-totalH));
- const out=[{s:greeting,z:46,x:86,y:150}];
+ const bodyStart=Math.max(top+62, Math.min(top+82, bottom-94-totalH));
+ const out=[{s:greeting,z:52,x:86,y:150}];
  let y=bodyStart;
  for(const line of bodyLines){
   if(line)out.push({s:line,z:chosen,x:left,y});
   y+=lineH;
  }
- // Chữ ký đặt sau nội dung, tự điều chỉnh theo chiều dài thư.
- const signY=Math.min(610,Math.max(y+26, Math.min(575, y+44)));
- out.push({s:'Thân ái,',z:31,x:690,y:signY},{s:'Em Hiếu Làm Thơ',z:33,x:560,y:signY+38});
+ // Chữ ký nằm gọn phía dưới nội dung, không đè lên lời chúc.
+ const signY=Math.min(610,Math.max(y+20, Math.min(575, y+32)));
+ out.push({s:'Thân ái,',z:34,x:690,y:signY},{s:'Em Hiếu Làm Thơ',z:36,x:560,y:signY+38});
  L.lines=out;
  L.total=out.reduce((a,l)=>a+l.s.length,0);
 }
