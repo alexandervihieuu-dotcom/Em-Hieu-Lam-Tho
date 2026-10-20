@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -16,7 +15,7 @@ canvas{position:fixed;inset:0;display:block;z-index:0;touch-action:none}
 .glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);border-radius:22px;box-shadow:var(--shadow)}
 #title{position:fixed;z-index:3;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);padding:8px 24px;font:600 clamp(25px,3.3vw,36px) 'Dancing Script',cursive;color:#fff;text-shadow:0 2px 16px rgba(94,43,76,.55);white-space:nowrap;pointer-events:none;letter-spacing:.3px}
 #title:after{content:'';position:absolute;left:28%;right:28%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,235,198,.9),transparent)}
-#bar{position:fixed;z-index:4;bottom:calc(15px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;gap:9px;padding:10px;flex-wrap:wrap;align-items:center;justify-content:center;width:max-content;max-width:min(94vw,620px);border-radius:24px;background:rgba(47,48,43,.64);border:1px solid rgba(255,255,255,.28);box-shadow:0 14px 40px rgba(35,30,40,.2)}
+#bar{position:fixed;z-index:4;bottom:calc(15px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:12px;align-items:stretch;justify-content:center;width:min(440px,calc(100vw - 28px));max-height: min(42vh,360px);overflow:auto;border-radius:24px;background:rgba(47,48,43,.68);border:1px solid rgba(255,255,255,.32);box-shadow:0 14px 40px rgba(35,30,40,.24)}
 button{font:600 14px 'Playfair Display',Georgia,serif;color:#674354;background:linear-gradient(145deg,rgba(255,250,245,.96),rgba(235,221,221,.88));border:1px solid rgba(255,255,255,.78);border-radius:15px;padding:12px 16px;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,background .22s ease;box-shadow:0 4px 12px rgba(44,27,42,.08);touch-action:manipulation}
 button:hover{transform:translateY(-2px);background:#fff8f1;box-shadow:0 8px 20px rgba(44,27,42,.15)}
 button:active{transform:translateY(0) scale(.98)}
@@ -33,7 +32,7 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 #recipientName::placeholder{color:#9d7b8d}
 #recipientName:focus{border-color:#b77b92;box-shadow:0 0 0 3px rgba(169,92,121,.13)}
 .recipient-picks{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:2px}.recipient-picks button{padding:8px 12px;font-size:12px;border-radius:999px;background:rgba(255,255,255,.7)}.recipient-help{max-width:320px;color:#855e74;font:11px/1.5 Arial,sans-serif;margin-top:-10px}
-#bar button{white-space:nowrap}
+#bar button{white-space:normal;min-height:44px;padding:12px 10px;font-size:14px;line-height:1.25}
 
 #intro h1{font:600 clamp(42px,8vw,78px) 'Dancing Script',cursive;margin:0;color:#fffaf5;text-shadow:0 3px 22px rgba(104,56,91,.3)}
 #intro p{max-width:520px;margin:0 0 8px;font-size:clamp(14px,2vw,17px);line-height:1.7;color:#6a3f59}
@@ -42,12 +41,13 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 #go{background:linear-gradient(135deg,#a95c79,#81516f);color:#fffaf5;font-size:16px;padding:14px 30px;border-radius:999px;border:1px solid rgba(255,255,255,.55);box-shadow:0 10px 28px rgba(104,56,91,.22)}
 @media(max-width:600px){
  #title{top:calc(10px + env(safe-area-inset-top,0px));font-size:27px}
- #bar{bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:7px;padding:8px;max-width:calc(100vw - 20px);width:auto;border-radius:20px}
- #bar button{font-size:11px;padding:9px 10px;border-radius:12px}
+ #bar{bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:7px;padding:8px;width:calc(100vw - 20px);max-height:min(43vh,390px);border-radius:20px}
+ #bar button{font-size:12px;padding:10px 8px;min-height:42px;border-radius:12px}
  #hint{bottom:calc(126px + env(safe-area-inset-bottom,0px));font-size:12px;line-height:1.5}
  #close{top:calc(58px + env(safe-area-inset-top,0px));right:10px;font-size:12px;padding:9px 13px}
  #toast{top:42%;font-size:13px}
 }
+@media(min-width:701px){#bar{bottom:20px;width:min(440px,calc(100vw - 36px));gap:9px}#hint{bottom:calc(min(42vh,360px) + 30px);max-width:min(760px,82vw)}#close{right:24px;top:24px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 .saved-panel{position:fixed;z-index:8;top:50%;left:50%;transform:translate(-50%,-46%) scale(.98);width:min(520px,calc(100vw - 28px));max-height:min(72vh,620px);padding:22px;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s ease,transform .24s ease,visibility .24s;background:rgba(255,249,241,.94);border:1px solid rgba(255,255,255,.82);color:#59334a}
@@ -72,7 +72,7 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 </style>
 </head>
 <body>
-<div id="intro"><div id="bloom">🌸</div><h1>Em Hiếu Làm Thơ</h1><p>Một khu vườn nhỏ, gửi đến bạn những lời chúc dịu dàng và chân thành</p><label id="nameLabel" for="recipientName">Gửi lời chúc đến</label><input id="recipientName" maxlength="28" autocomplete="name" placeholder="Nhập tên hoặc chọn người thân..."><div class="recipient-picks" aria-label="Chọn người nhận"><button type="button" data-recipient="HUY">🌷 Mẹ</button><button type="button" data-recipient="Vi HƯƠNG">🌸 Chị</button><button type="button" data-recipient="Hằng">💐 Chị Gái</button><button type="button" data-recipient="Tiên">🌼em gái</button><button type="button" data-recipient="Tám">🌺 Dì</button><button type="button" data-recipient="Ngọc">💗 Người yêu</button><button type="button" data-recipient="Bạn nữ">🎀 Bạn nữ</button></div><small class="recipient-help">Nhập tên hoặc chọn nhanh. Vườn sẽ tự nhận diện lời chúc phù hợp.</small><button id="go">Bước vào vườn</button></div>
+<div id="intro"><div id="bloom">🌸</div><h1>Em Hiếu Làm Thơ</h1><p>Một khu vườn nhỏ, gửi đến bạn những lời chúc dịu dàng và chân thành</p><label id="nameLabel" for="recipientName">Gửi lời chúc đến</label><input id="recipientName" maxlength="28" autocomplete="name" placeholder="Nhập tên hoặc chọn người thân..."><div class="recipient-picks" aria-label="Chọn người nhận"><button type="button" data-recipient="HUY">🌷 Mẹ</button><button type="button" data-recipient="Vi HƯƠNG">🌸 Chị</button><button type="button" data-recipient="Hằng">💐 Hằng – chị gái</button><button type="button" data-recipient="Tiên">🌼 Tiên – em gái</button><button type="button" data-recipient="Tám">🌺 Dì Tám</button><button type="button" data-recipient="Ngọc">💗 Người yêu</button><button type="button" data-recipient="Bạn nữ">🎀 Bạn nữ</button></div><small class="recipient-help">Nhập tên hoặc chọn nhanh. Vườn sẽ tự nhận diện lời chúc phù hợp.</small><button id="go">Bước vào vườn</button></div>
 <div id="vig"></div>
 <div id="title">Em Hiếu Làm Thơ</div>
 <div id="hint">Hãy chạm vào một bức thư treo trên thanh ngang để đọc lời chúc. Hoa chỉ dùng để trang trí nhé!</div>
@@ -343,7 +343,7 @@ function drawPaper(n){
  ptex.needsUpdate=true
 }
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)};
-let S=1;function resize(){cam.aspect=innerWidth/innerHeight;cam.fov=innerWidth<700?48:55;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);if(comp)comp.setSize(innerWidth,innerHeight);S=Math.min(1.75,Math.max(.76,cam.aspect*1.5))}resize();addEventListener('resize',resize);
+let S=1;function resize(){const aspect=innerWidth/innerHeight;cam.aspect=aspect;const baseFov=48;const targetAspect=.78;cam.fov=aspect>1.05?2*Math.atan(Math.tan(THREE.MathUtils.degToRad(baseFov/2))*Math.min(1,targetAspect/aspect))*180/Math.PI:baseFov;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);if(comp)comp.setSize(innerWidth,innerHeight);S=Math.min(1.75,Math.max(.76,Math.min(aspect,1.1)*1.5))}resize();addEventListener('resize',resize);
 // Thư treo trên giàn
 const hang=[];const wood=new THREE.MeshLambertMaterial({color:0x8B6046});
 [-6,6].forEach(x=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(.12,.15,6,6),wood);p.position.set(x,2.8,-4);scene.add(p)});
