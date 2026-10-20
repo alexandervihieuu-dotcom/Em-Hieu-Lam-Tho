@@ -32,7 +32,8 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 #recipientName::placeholder{color:#9d7b8d}
 #recipientName:focus{border-color:#b77b92;box-shadow:0 0 0 3px rgba(169,92,121,.13)}
 .recipient-picks{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:2px}.recipient-picks button{padding:8px 12px;font-size:12px;border-radius:999px;background:rgba(255,255,255,.7)}.recipient-help{max-width:320px;color:#855e74;font:11px/1.5 Arial,sans-serif;margin-top:-10px}
-#bar button{white-space:normal;min-height:44px;padding:12px 10px;font-size:14px;line-height:1.25}
+#bar button{white-space:normal;min-height:48px;padding:12px 10px;font-size:15px;line-height:1.25}
+#bar button#copy,#bar button#favorite,#bar button#savedBtn,#bar button#share{display:none!important}
 
 #intro h1{font:600 clamp(42px,8vw,78px) 'Dancing Script',cursive;margin:0;color:#fffaf5;text-shadow:0 3px 22px rgba(104,56,91,.3)}
 #intro p{max-width:520px;margin:0 0 8px;font-size:clamp(14px,2vw,17px);line-height:1.7;color:#6a3f59}
@@ -41,13 +42,14 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 #go{background:linear-gradient(135deg,#a95c79,#81516f);color:#fffaf5;font-size:16px;padding:14px 30px;border-radius:999px;border:1px solid rgba(255,255,255,.55);box-shadow:0 10px 28px rgba(104,56,91,.22)}
 @media(max-width:600px){
  #title{top:calc(10px + env(safe-area-inset-top,0px));font-size:27px}
- #bar{bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:7px;padding:8px;width:calc(100vw - 20px);max-height:min(43vh,390px);border-radius:20px}
- #bar button{font-size:12px;padding:10px 8px;min-height:42px;border-radius:12px}
- #hint{bottom:calc(126px + env(safe-area-inset-bottom,0px));font-size:12px;line-height:1.5}
+ #bar{bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:9px;padding:10px;width:calc(100vw - 20px);max-height:min(34vh,300px);border-radius:20px;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #bar button{font-size:clamp(14px,3.8vw,17px);padding:13px 8px;min-height:52px;border-radius:14px}
+ #hint{bottom:calc(min(34vh,300px) + 22px + env(safe-area-inset-bottom,0px));font-size:14px;line-height:1.5;width:92vw}
  #close{top:calc(58px + env(safe-area-inset-top,0px));right:10px;font-size:12px;padding:9px 13px}
  #toast{top:42%;font-size:13px}
 }
 @media(min-width:701px){#bar{bottom:20px;width:min(440px,calc(100vw - 36px));gap:9px}#hint{bottom:calc(min(42vh,360px) + 30px);max-width:min(760px,82vw)}#close{right:24px;top:24px}}
+@media(max-width:600px) and (max-height:720px){#bar{max-height:31vh;padding:7px;gap:6px}#bar button{min-height:45px;padding:9px 6px}#hint{bottom:calc(31vh + 17px + env(safe-area-inset-bottom,0px))}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 .saved-panel{position:fixed;z-index:8;top:50%;left:50%;transform:translate(-50%,-46%) scale(.98);width:min(520px,calc(100vw - 28px));max-height:min(72vh,620px);padding:22px;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s ease,transform .24s ease,visibility .24s;background:rgba(255,249,241,.94);border:1px solid rgba(255,255,255,.82);color:#59334a}
@@ -75,7 +77,7 @@ button:focus-visible{outline:2px solid #f8d99d;outline-offset:3px}
 <div id="intro"><div id="bloom">🌸</div><h1>Em Hiếu Làm Thơ</h1><p>Một khu vườn nhỏ, gửi đến bạn những lời chúc dịu dàng và chân thành</p><label id="nameLabel" for="recipientName">Gửi lời chúc đến</label><input id="recipientName" maxlength="28" autocomplete="name" placeholder="Nhập tên hoặc chọn người thân..."><div class="recipient-picks" aria-label="Chọn người nhận"><button type="button" data-recipient="HUY">🌷 Mẹ</button><button type="button" data-recipient="Vi HƯƠNG">🌸 Chị</button><button type="button" data-recipient="Hằng">💐 Hằng – chị gái</button><button type="button" data-recipient="Tiên">🌼 Tiên – em gái</button><button type="button" data-recipient="Tám">🌺 Dì Tám</button><button type="button" data-recipient="Ngọc">💗 Người yêu</button><button type="button" data-recipient="Bạn nữ">🎀 Bạn nữ</button></div><small class="recipient-help">Nhập tên hoặc chọn nhanh. Vườn sẽ tự nhận diện lời chúc phù hợp.</small><button id="go">Bước vào vườn</button></div>
 <div id="vig"></div>
 <div id="title">Em Hiếu Làm Thơ</div>
-<div id="hint">Hãy chạm vào một bức thư treo trên thanh ngang để đọc lời chúc. Hoa chỉ dùng để trang trí nhé!</div>
+<div id="hint">Chạm trực tiếp vào một bức thư treo trên thanh ngang để đọc lời chúc. Hoa chỉ dùng để trang trí nhé!</div>
 <button id="close">Đóng thư</button>
 <div id="toast" class="glass" role="status" aria-live="polite">Đã sao chép lời chúc</div>
 <div id="cardEditor" class="card-editor" aria-hidden="true"><div class="editor-box"><div class="editor-head"><div><span class="saved-kicker">MAKE IT PERSONAL</span><h2>Thiết kế thiệp của riêng bạn</h2></div><button id="editorClose" aria-label="Đóng trình thiết kế">✕</button></div><div class="editor-grid"><div class="editor-controls"><label class="editor-field wide">Tên người nhận<input id="cardTo" maxlength="32" placeholder="Ví dụ: Mẹ yêu, chị Lan..."></label><label class="editor-field wide">Lời chúc<textarea id="cardMessage" maxlength="240" placeholder="Nhập lời chúc bạn muốn gửi..."></textarea></label><label class="editor-field">Mẫu nền<select id="cardTheme"><option value="rose">Hồng dịu dàng</option><option value="lavender">Lavender mộng mơ</option><option value="mint">Xanh mint</option><option value="butter">Vàng bơ</option><option value="night">Đêm ánh sao</option></select></label><label class="editor-field">Kiểu chữ<select id="cardFont"><option value="script">Nét viết tay</option><option value="serif">Thanh lịch</option><option value="sans">Hiện đại</option></select></label><label class="editor-field">Màu chữ<input id="cardInk" type="color" value="#633d54"></label><label class="editor-field">Khung thiệp<select id="cardFrame"><option value="double">Viền đôi</option><option value="floral">Hoa nhỏ</option><option value="none">Không viền</option></select></label></div><div class="card-preview-wrap"><div class="card-preview"><canvas id="cardCanvas" width="800" height="1000" aria-label="Bản xem trước thiệp"></canvas></div><p class="editor-tip">Bản xem trước cập nhật tự động. Thiệp sẽ được xuất thành ảnh PNG chất lượng cao để bạn gửi hoặc đăng lên mạng xã hội.</p></div></div><div class="editor-actions"><button id="cardDownload" class="primary">✧ Xuất thiệp PNG</button><button id="cardUseWish">↙ Dùng lời chúc đang mở</button><button id="cardReset">Làm mới nội dung</button></div></div></div>
@@ -350,7 +352,9 @@ const hang=[];const wood=new THREE.MeshLambertMaterial({color:0x8B6046});
 {const b=new THREE.Mesh(new THREE.BoxGeometry(13,.2,.3),wood);b.position.set(0,5.7,-4);scene.add(b)}
 for(let i=0;i<5;i++){const piv=new THREE.Group();piv.position.set(-4.4+i*2.2,5.6,-4);scene.add(piv);
  piv.add(new THREE.Mesh(new THREE.CylinderGeometry(.01,.01,1.5,3),new THREE.MeshBasicMaterial({color:0xffffff})).translateY(-.75));
- const e=makeEnv();e.paper.visible=false;e.g.scale.setScalar(.45);e.g.position.y=-1.5-.3;piv.add(e.g);e.body.userData.hang=1;e.body.userData.piv=piv;hits.push(e.body);hang.push({piv,ph:i*1.3,e})}
+ const e=makeEnv();e.paper.visible=false;e.g.scale.setScalar(mobile?.68:.45);e.g.position.y=-1.5-.3;piv.add(e.g);e.body.userData.hang=1;e.body.userData.piv=piv;hits.push(e.body);
+ // Vùng chạm lớn hơn cho điện thoại, giúp mở thư dễ dàng dù ngón tay che mất phong bì.
+ const touchTarget=new THREE.Mesh(new THREE.BoxGeometry(mobile?3.05:2.2,mobile?2.35:1.6,.5),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide}));touchTarget.position.set(0,-1.5,0.08);touchTarget.userData.hang=1;touchTarget.userData.piv=piv;piv.add(touchTarget);hits.push(touchTarget);hang.push({piv,ph:i*1.3,e,touchTarget})}
 
 // ===== Camera quỹ đạo =====
 const tgt=new THREE.Vector3(0,1.6,0),tgtG=tgt.clone();let th=0,thG=0,ph=1.22,phG=1.22,rad=16,radG=16,idle=0,saved=null,cur=null;
@@ -379,7 +383,7 @@ cv.addEventListener('pointermove',e=>{idle=0;PX.tx=e.clientX/innerWidth-.5;PX.ty
   else{thG-=(e.clientX-p.clientX)*.006;phG=Math.max(.35,Math.min(1.45,phG-(e.clientY-p.clientY)*.005));ptrs.set(e.pointerId,e)}}
  if(e.pointerType==='mouse'&&!L.open){const o=pick(e);hov=o&&o.userData.ref||null;cv.style.cursor=o?'pointer':'grab'}});
 cv.addEventListener('pointerup',e=>{ptrs.delete(e.pointerId);
- if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<7){if(L.open){if(L.t>3.5)closeLetter()}else{const o=pick(e);if(o&&o.userData.hang){openHang(o.userData.piv)}}}down=null});
+ if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<12){if(L.open){if(L.t>1.2)closeLetter()}else{const o=pick(e);if(o&&o.userData.hang){openHang(o.userData.piv)}}}down=null});
 cv.addEventListener('wheel',e=>{if(!L.open)radG=Math.max(4,Math.min(28,radG*(1+e.deltaY*.001)));idle=0},{passive:true});
 function openHang(piv){openLetter(ALL[Math.floor(Math.random()*ALL.length)],piv.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0,-1.8,0)),null)}
 $('rand').onclick=()=>{if(L.open)return;const h=hang[Math.floor(Math.random()*hang.length)];openHang(h.piv)};
